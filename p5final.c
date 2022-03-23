@@ -1,4 +1,17 @@
 #include<stdio.h>
+#include<math.h>
+float my_sqrt(float fl)
+{
+    float sqrt;
+    float a=fl/2;
+    float a2=fl;
+    while(fabs(a2-a)>0.000001)
+    {
+      a2=a;
+      a=(a+(fl/a))/2;
+    }
+    return a;
+}
 int input_array_size()
 {
   int a;
@@ -14,19 +27,11 @@ void init_array(int n,int a[n])
 }
 void erotosthenes_sieve(int n, int a[n])
 {
-  int k=0;
-  for(int i=2;i<n;i++)
-    {
-      for(int j=i;j<n+2;j=j+i)
+  for(int i=2;i<my_sqrt(n);i++)
+      for(int j=i+i;j<n+2;j=j+i)
         {
-          if(k==1)
-          {
             a[j]=0;
-          }
-          k=1;
         }
-      k=0;
-    }
 }
 void output(int n,int a[n])
 {
@@ -35,7 +40,7 @@ void output(int n,int a[n])
     {
       if(a[i]!=0)
       {
-        printf("%d,",a[i]);
+        printf("%d ",a[i]);
       }
     }
   printf("\n");
